@@ -1,8 +1,14 @@
 <html>
    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Nex Navbar</title>
    </head>
    <style>
+      * {
+         box-sizing: border-box;
+      }
+      
       a{
       font-weight: bold;
       }
@@ -25,7 +31,7 @@
       backdrop-filter: blur(5px);
       -webkit-backdrop-filter: blur(5px);
       background-color: #00000050; 
-      overflow: hidden; 
+      overflow: visible;
       position: fixed;
       top: 0;
       z-index: 1000;
@@ -35,37 +41,52 @@
       background-attachment: fixed;
       background-size: cover;
       margin: 0;
-      padding-top: 65px;
+      padding-top: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
       }
       .nav-links {
       display: flex;
       justify-content: center;
       flex: 1;
+      gap: 5px;
       }
       .nav-icon {
       vertical-align:center;
       margin-right: 8px;
       font-weight: bold;
+      height: 20px;
       }
       .logo {
       height: 40px;
       margin-left: 10px;
+      flex-shrink: 0;
       }
       .section {
       margin-bottom: 24px;
       color: white;
       font-family: Arial, Helvetica, sans-serif;
+      max-width: 90%;
+      margin: 0 auto;
+      padding: 10px;
+      box-sizing: border-box;
       }
       h1 {
       margin-top: 40px;
       margin-bottom: 16px;
       color: white;
       font-family: Arial, Helvetica, sans-serif;
+      font-size: 2rem;
+      text-align: center;
       }
       .search-form {
       margin-left: auto;
-      margin-top: 14px;
+      margin-top: 0;
       margin-right: 10px;
+      flex-shrink: 0;
       }
       .search-box {
       display: flex;
@@ -75,6 +96,8 @@
       background: #1b1b1b69;
       box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
       border: rgba(77, 77, 77, 0.226) solid 1px;
+      width: 100%;
+      max-width: 300px;
       }
       .search-icon {
       margin-right: 10px;
@@ -93,37 +116,198 @@
       color: #888;
       }
 
+      .menu-toggle {
+         display: none;
+         flex-direction: column;
+         cursor: pointer;
+         gap: 5px;
+         padding: 8px;
+         margin-right: 10px;
+         background: none;
+         border: none;
+      }
+
+      .hamburger-line {
+         width: 25px;
+         height: 3px;
+         background-color: white;
+         border-radius: 2px;
+         transition: all 0.3s ease-in-out;
+      }
+
+      .menu-toggle.active .hamburger-line:nth-child(1) {
+         transform: rotate(45deg) translate(10px, 10px);
+      }
+
+      .menu-toggle.active .hamburger-line:nth-child(2) {
+         opacity: 0;
+      }
+
+      .menu-toggle.active .hamburger-line:nth-child(3) {
+         transform: rotate(-45deg) translate(7px, -7px);
+      }
+
+      .drawer-overlay {
+         display: none;
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5);
+         z-index: 999;
+      }
+
+      .drawer-overlay.active {
+         display: block;
+      }
+
+      .nav-drawer {
+         display: none;
+         position: fixed;
+         left: 0;
+         top: 0;
+         width: 100%;
+         max-width: 280px;
+         height: 100vh;
+         background-color: rgba(0, 0, 0, 0.95);
+         backdrop-filter: blur(5px);
+         -webkit-backdrop-filter: blur(5px);
+         z-index: 1001;
+         flex-direction: column;
+         padding-top: 70px;
+         transform: translateX(-100%);
+         transition: transform 0.3s ease-in-out;
+         overflow-y: auto;
+      }
+
+      .nav-drawer.active {
+         transform: translateX(0);
+      }
+
+      .nav-drawer a {
+         display: flex;
+         align-items: center;
+         padding: 15px 20px;
+         color: white;
+         text-decoration: none;
+         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+         transition: background-color 0.2s ease;
+      }
+
+      .nav-drawer a:hover {
+         background-color: #a1a1a14f;
+      }
+
+      @media (max-width: 1200px) {
+         .search-box {
+            max-width: 200px;
+         }
+
+         #search-input {
+            width: 150px;
+         }
+      }
+
       @media (max-width: 768px) {
          .nav {
-            height: auto;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 10px;
+            height: 60px;
+            width: calc(100% - 20px);
+            margin: 10px;
+            border-radius: 8px;
+            flex-wrap: nowrap;
+            padding: 0;
+         }
+
+         body {
+            padding-top: 70px;
+         }
+
+         .menu-toggle {
+            display: flex;
          }
 
          .nav-links {
             display: none;
-            flex-direction: column;
-            width: 100%;
          }
 
-         .nav-links a {
-            padding: 10px;
-            text-align: left;
-            width: 100%;
+         .search-form {
+            margin-left: 0;
+            margin-right: 10px;
          }
 
-         .menu-toggle {
-            display: block;
-            cursor: pointer;
-            background-color: #00000050;
-            padding: 10px;
-            border-radius: 8px;
-            color: white;
+         .search-box {
+            max-width: 150px;
+            padding: 6px 15px;
          }
 
-         .menu-toggle.open + .nav-links {
-            display: flex;
+         #search-input {
+            width: 100px;
+            font-size: 12px;
+         }
+
+         .logo {
+            height: 35px;
+            margin-left: 5px;
+         }
+
+         .nav-drawer a {
+            font-size: 15px;
+            padding: 12px 15px;
+         }
+
+         .nav-drawer a img {
+            height: 18px;
+            margin-right: 12px;
+         }
+
+         h1 {
+            font-size: 1.5rem;
+         }
+
+         .section {
+            max-width: 95%;
+            font-size: 14px;
+         }
+      }
+
+      @media (max-width: 480px) {
+         .nav {
+            margin: 5px;
+            width: calc(100% - 10px);
+         }
+
+         .search-form {
+            display: none;
+         }
+
+         .search-box {
+            max-width: 120px;
+            padding: 5px 10px;
+         }
+
+         #search-input {
+            width: 80px;
+            font-size: 11px;
+         }
+
+         .logo {
+            height: 30px;
+         }
+
+         h1 {
+            font-size: 1.2rem;
+            margin-top: 20px;
+         }
+
+         .section {
+            max-width: 100%;
+            padding: 8px;
+            font-size: 13px;
+         }
+
+         body {
+            padding-top: 65px;
          }
       }
    </style>
@@ -157,19 +341,42 @@
       });
 
       document.addEventListener('DOMContentLoaded', () => {
-          const menuToggle = document.createElement('div');
-          menuToggle.className = 'menu-toggle';
-          menuToggle.textContent = '☰';
+          const menuToggle = document.querySelector('.menu-toggle');
+          const navDrawer = document.querySelector('.nav-drawer');
+          const drawerOverlay = document.querySelector('.drawer-overlay');
+          const drawerLinks = document.querySelectorAll('.nav-drawer a');
 
-          const nav = document.querySelector('.nav');
-          const navLinks = document.querySelector('.nav-links');
-
+          // Toggle drawer
           menuToggle.addEventListener('click', () => {
-              menuToggle.classList.toggle('open');
-              navLinks.classList.toggle('open');
+              menuToggle.classList.toggle('active');
+              navDrawer.classList.toggle('active');
+              drawerOverlay.classList.toggle('active');
           });
 
-          nav.insertBefore(menuToggle, nav.firstChild);
+          // Close drawer when overlay is clicked
+          drawerOverlay.addEventListener('click', () => {
+              menuToggle.classList.remove('active');
+              navDrawer.classList.remove('active');
+              drawerOverlay.classList.remove('active');
+          });
+
+          // Close drawer when a link is clicked
+          drawerLinks.forEach(link => {
+              link.addEventListener('click', () => {
+                  menuToggle.classList.remove('active');
+                  navDrawer.classList.remove('active');
+                  drawerOverlay.classList.remove('active');
+              });
+          });
+
+          // Close drawer on window resize if resizing back to desktop
+          window.addEventListener('resize', () => {
+              if (window.innerWidth > 768) {
+                  menuToggle.classList.remove('active');
+                  navDrawer.classList.remove('active');
+                  drawerOverlay.classList.remove('active');
+              }
+          });
       });
    </script>
    <body>
@@ -191,29 +398,28 @@
                <input type="text" id="search-input" placeholder="Search here..." />
             </div>
          </form>
+         <button class="menu-toggle" aria-label="Toggle menu">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+         </button>
       </nav>
+
+      <div class="drawer-overlay"></div>
+
+      <div class="nav-drawer">
+         <a href="#home" style="color: white; text-decoration: none;"><img src="home.png" class="nav-icon">Home</a>
+         <a href="#games" style="color: white; text-decoration: none;"><img src="game icon.png" class="nav-icon">Games</a>
+         <a href="#a-zgames" style="color: white; text-decoration: none;"><img src="sort icon.png" class="nav-icon">A-Z Games</a>
+         <a href="#switch" style="color: rgb(255, 0, 0); text-decoration: none;"><img src="nintendo icon.png" class="nav-icon">Switch Games</a>
+         <a href="#request" style="color: white; text-decoration: none;"><img src="request.png" class="nav-icon">Request Games</a>
+         <a href="#updates" style="color: white; text-decoration: none;"><img src="update.png" class="nav-icon">Recent Updates</a>
+         <a href="#faq" style="color: white; text-decoration: none;"><img src="faq.png" class="nav-icon">FAQ</a>
+         <a href="#discord" style="color: rgb(76, 0, 253); text-decoration: none;"><img src="discord.png" class="nav-icon">JOIN DISCORD</a>
+      </div>
+
       <br>
       <!-- Content below the navbar FOR SCROLLABLE VIEW ADDED MYSELF xdddd --> 
-      <h1>Game Hub</h1>
-      <div class="section">
-         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
-      </div>
-      <div class="section">
-         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
-      </div>
-      <div class="section">
-         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
-      </div>
-      <h1>Game Hub</h1>
-      <div class="section">
-         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
-      </div>
-      <div class="section">
-         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
-      </div>
-      <div class="section">
-         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
-      </div>
       <h1>Game Hub</h1>
       <div class="section">
          In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
