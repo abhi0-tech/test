@@ -155,6 +155,22 @@
               section.style.display = 'block';
           });
       });
+
+      document.addEventListener('DOMContentLoaded', () => {
+          const menuToggle = document.createElement('div');
+          menuToggle.className = 'menu-toggle';
+          menuToggle.textContent = '☰';
+
+          const nav = document.querySelector('.nav');
+          const navLinks = document.querySelector('.nav-links');
+
+          menuToggle.addEventListener('click', () => {
+              menuToggle.classList.toggle('open');
+              navLinks.classList.toggle('open');
+          });
+
+          nav.insertBefore(menuToggle, nav.firstChild);
+      });
    </script>
    <body>
       <nav class=nav>
@@ -178,16 +194,6 @@
       </nav>
       <br>
       <!-- Content below the navbar FOR SCROLLABLE VIEW ADDED MYSELF xdddd --> 
-      <h1>Game Hub</h1>
-      <div class="section">
-         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
-      </div>
-      <div class="section">
-         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
-      </div>
-      <div class="section">
-         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
-      </div>
       <h1>Game Hub</h1>
       <div class="section">
          In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
