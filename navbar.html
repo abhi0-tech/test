@@ -1,0 +1,252 @@
+<html>
+   <head>
+      <title>Nex Navbar</title>
+   </head>
+   <style>
+      a{
+      font-weight: bold;
+      }
+      nav a:hover {
+      background-color: #a1a1a14f;
+      color: black;
+      border-radius: 8px;
+      transition: all 0.3s ease-in-out;
+      }
+      .nav {
+      height: 60px;
+      width: calc(100% - 40px);
+      margin: 10px;
+      font-family: inter, sans-serif;
+      font-size: 16px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      color: white;
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      background-color: #00000050; 
+      overflow: hidden; 
+      position: fixed;
+      top: 0;
+      z-index: 1000;
+      }
+      body {
+      background-image: url('gaming.jpg');
+      background-attachment: fixed;
+      background-size: cover;
+      margin: 0;
+      padding-top: 65px;
+      }
+      .nav-links {
+      display: flex;
+      justify-content: center;
+      flex: 1;
+      }
+      .nav-icon {
+      vertical-align:center;
+      margin-right: 8px;
+      font-weight: bold;
+      }
+      .logo {
+      height: 40px;
+      margin-left: 10px;
+      }
+      .section {
+      margin-bottom: 24px;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      }
+      h1 {
+      margin-top: 40px;
+      margin-bottom: 16px;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      }
+      .search-form {
+      margin-left: auto;
+      margin-top: 14px;
+      margin-right: 10px;
+      }
+      .search-box {
+      display: flex;
+      align-items: center;
+      padding: 8px 25px;
+      border-radius: 999px;
+      background: #1b1b1b69;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
+      border: rgba(77, 77, 77, 0.226) solid 1px;
+      }
+      .search-icon {
+      margin-right: 10px;
+      font-size: 18px;
+      color: #cfcfcf;
+      }
+      #search-input {
+      border: none;
+      outline: none;
+      background: transparent;
+      color: #f5f5f5;
+      font-size: 14px;
+      width: 220px; 
+      }
+      #search-input::placeholder {
+      color: #888;
+      }
+
+      @media (max-width: 768px) {
+         .nav {
+            height: auto;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 10px;
+         }
+
+         .nav-links {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+         }
+
+         .nav-links a {
+            padding: 10px;
+            text-align: left;
+            width: 100%;
+         }
+
+         .menu-toggle {
+            display: block;
+            cursor: pointer;
+            background-color: #00000050;
+            padding: 10px;
+            border-radius: 8px;
+            color: white;
+         }
+
+         .menu-toggle.open + .nav-links {
+            display: flex;
+         }
+      }
+   </style>
+   <script>
+      function handleSearch(e) {
+          e.preventDefault();
+          const q = document.getElementById('search-input').value.trim().toLowerCase();
+          if (!q) return false;
+      
+          const sections = document.querySelectorAll('.section, h1');
+          
+          sections.forEach(section => {
+              const text = section.textContent.toLowerCase();
+              if (text.includes(q)) {
+                  section.style.display = 'block';
+                  section.scrollIntoView({ behavior: 'smooth' });
+              } else {
+                  section.style.display = 'none';
+              }
+          });
+          
+          document.getElementById('search-input').value = '';
+          return false;
+      }
+
+      window.addEventListener('load', () => {
+          document.getElementById('search-input').value = '';
+          document.querySelectorAll('.section, h1').forEach(section => {
+              section.style.display = 'block';
+          });
+      });
+   </script>
+   <body>
+      <nav class=nav>
+         <img src="nex.png" class="logo">
+         <div class="nav-links">
+            <a href="#home" style="color: white; text-align: center; padding: 14px 16px; text-decoration: none;"><img src="home.png" class="nav-icon">Home</img></a>
+            <a href="#games" style="color: white; text-align: center; padding: 14px 16px; text-decoration: none;"><img src="game icon.png" class="nav-icon">Games</a>
+            <a href="#a-zgames" style="color: white; text-align: center; padding: 14px 16px; text-decoration: none;"><img src="sort icon.png" class="nav-icon">A-Z Games</a>
+            <a href="#switch" style="color: rgb(255, 0, 0); text-align: center; padding: 14px 16px; text-decoration: none;"><img src="nintendo icon.png" class="nav-icon">Switch Games</a>
+            <a href="#request" style="color: white; text-align: center; padding: 14px 16px; text-decoration: none;"><img src="request.png" class="nav-icon">Request Games</a>
+            <a href="#updates" style="color: white; text-align: center; padding: 14px 16px; text-decoration: none;"><img src="update.png"class="nav-icon">Recent Updates</a>
+            <a href="#faq" style="color: white; text-align: center; padding: 14px 16px; text-decoration: none;"><img src="faq.png" class="nav-icon">FAQ</a>
+            <a href="#discord" style="color: rgb(76, 0, 253); text-align: center; padding: 14px 16px; text-decoration: none;"><img src="discord.png" class="nav-icon">JOIN DISCORD</a>
+         </div>
+         <form class="search-form" onsubmit="return handleSearch(event)">
+            <div class="search-box">
+               <span class="search-icon"><img src="search.png"></span>
+               <input type="text" id="search-input" placeholder="Search here..." />
+            </div>
+         </form>
+      </nav>
+      <br>
+      <!-- Content below the navbar FOR SCROLLABLE VIEW ADDED MYSELF xdddd --> 
+      <h1>Game Hub</h1>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <h1>Game Hub</h1>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <h1>Game Hub</h1>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <h1>Game Hub</h1>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <h1>Game Hub</h1>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <h1>Game Hub</h1>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <h1>Game Hub</h1>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+      <div class="section">
+         In this arena, players explore different maps, unlock new characters, and upgrade their gear after every match. The focus is on fast decision-making, team coordination, and learning enemy patterns.
+      </div>
+   </body>
+</html>
